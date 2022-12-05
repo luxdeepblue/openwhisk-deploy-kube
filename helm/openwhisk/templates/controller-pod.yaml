@@ -57,14 +57,16 @@ spec:
       {{- end }}
 
       initContainers:
-{{- if not .Values.controller.lean }}
+{{- if and (not .Values.controller.lean) (not .Values.kafka.external) }}
       # The controller must wait for kafka and/or couchdb to be ready before it starts
 {{ include "openwhisk.readiness.waitForKafka" . | indent 6 }}
 {{- if .Values.scheduler.enabled }}
 {{ include "openwhisk.readiness.waitForEtcd" . | indent 6 }}
 {{- end }}
 {{- end }}
+{{- if (not .Values.db.external) }}
 {{ include "openwhisk.readiness.waitForCouchDB" . | indent 6 }}
+{{- end }}
 {{- if eq .Values.activationStoreBackend "ElasticSearch" }}
       # The controller must wait for elasticsearch to be ready before it starts
 {{ include "openwhisk.readiness.waitForElasticSearch" . | indent 6 }}

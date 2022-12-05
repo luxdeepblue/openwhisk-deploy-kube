@@ -61,6 +61,8 @@ spec:
             value: "{{ include "openwhisk.redis_host" . }}"
           - name: "REDIS_PORT"
             value: {{ .Values.redis.port | quote }}
+          - name: "REDIS_PASS"
+            value: {{ .Values.redis.password | quote }}
           - name: "PUBLIC_GATEWAY_URL"
             valueFrom:
               configMapKeyRef:

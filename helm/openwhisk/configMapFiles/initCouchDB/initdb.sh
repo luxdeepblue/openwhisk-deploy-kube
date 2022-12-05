@@ -54,8 +54,8 @@ until $( curl --output /dev/null --silent $DB_PROTOCOL://$DB_HOST:$DB_PORT/_util
 done
 
 # Enable single node mode (this also creates the system databases)
-echo "Enabling single node cluster"
-curl --silent -X POST -H "Content-Type: application/json" -u "$COUCHDB_USER:$COUCHDB_PASSWORD" $DB_PROTOCOL://$DB_HOST:$DB_PORT/_cluster_setup -d '{"action": "enable_single_node"}' || exit 1
+#echo "Enabling single node cluster"
+#curl --silent -X POST -H "Content-Type: application/json" -u "$COUCHDB_USER:$COUCHDB_PASSWORD" $DB_PROTOCOL://$DB_HOST:$DB_PORT/_cluster_setup -d '{"action": "enable_single_node"}' || exit 1
 
 # disable reduce limits on views
 echo "Disabling reduce limits on views"
